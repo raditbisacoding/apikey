@@ -3,28 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Situs Penyedia API Key</title>
+    <title>Nanzz APIs - Gateway Premium Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-900 text-white flex justify-center items-center h-screen">
-    <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
-        <h1 class="text-2xl font-bold text-center text-indigo-400 mb-6">REST API DASHBOARD</h1>
-        
-        <form action="/auth" method="POST" class="space-y-4">
+<body class="bg-[#0b0f19] text-gray-100 font-sans min-h-screen flex items-center justify-center relative overflow-hidden">
+    
+    <!-- Efek Cahaya Latar Belakang -->
+    <div class="absolute w-96 h-96 bg-purple-600 rounded-full blur-[120px] opacity-20 -top-10 -left-10"></div>
+    <div class="absolute w-96 h-96 bg-indigo-600 rounded-full blur-[120px] opacity-20 -bottom-10 -right-10"></div>
+
+    <div class="w-full max-w-md p-8 bg-[#151c2c] bg-opacity-60 backdrop-blur-md rounded-2xl border border-gray-800 shadow-2xl relative z-10 mx-4">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">NANZZ APIs</h1>
+            <p class="text-gray-400 text-sm mt-2">Dapatkan akses ribuan fitur automasi instan.</p>
+        </div>
+
+        <!-- Form Login & Register Terintegrasi AJAX -->
+        <div class="space-y-4">
             <div>
-                <label class="block text-sm mb-1">Username</label>
-                <input type="text" name="username" required class="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-xs uppercase tracking-wider text-gray-400 font-semibold mb-1">Username</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500"><i class="fas fa-user"></i></span>
+                    <input id="username" type="text" placeholder="Gunakan nama unik..." class="w-full pl-10 pr-4 py-2.5 bg-[#0f1422] border border-gray-700 rounded-xl focus:outline-none focus:border-purple-500 text-sm transition">
+                </div>
             </div>
             <div>
-                <label class="block text-sm mb-1">Password</label>
-                <input type="password" name="password" required class="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-xs uppercase tracking-wider text-gray-400 font-semibold mb-1">Password</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500"><i class="fas fa-lock"></i></span>
+                    <input id="password" type="password" placeholder="••••••••" class="w-full pl-10 pr-4 py-2.5 bg-[#0f1422] border border-gray-700 rounded-xl focus:outline-none focus:border-purple-500 text-sm transition">
+                </div>
             </div>
             
-            <div class="flex space-x-2 pt-2">
-                <button type="submit" name="action" value="login" class="w-1/2 bg-indigo-600 hover:bg-indigo-700 p-2 rounded font-semibold transition">Login</button>
-                <button type="submit" name="action" value="register" class="w-1/2 bg-gray-600 hover:bg-gray-500 p-2 rounded font-semibold transition">Daftar</button>
+            <div class="flex gap-3 pt-4">
+                <button onclick="handleAuth('login')" class="w-1/2 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl font-bold text-sm transition transform active:scale-95 shadow-lg shadow-purple-900/30">LOG IN</button>
+                <button onclick="handleAuth('register')" class="w-1/2 py-2.5 bg-[#1d263b] hover:bg-[#25314c] border border-gray-700 rounded-xl font-bold text-sm transition text-gray-300">REGISTER</button>
             </div>
-        </form>
+        </div>
     </div>
+
+    <script>
+        function handleAuth(type) {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            if(!u || !p) return alert("Harap isi semua kolom.");
+
+            fetch(`/auth/${type}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username: u, password: p})
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if(data.status && type === 'login') {
+                    window.location.href = `/dashboard?user=${data.username}`;
+                }
+            });
+        }
+    </script>
 </body>
 </html>
