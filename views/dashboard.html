@@ -3,67 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>Dashboard Developer - Nanzz APIs</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen p-6">
-    <div class="max-w-4xl mx-auto">
-        <div class="flex justify-between items-center border-b border-gray-700 pb-4 mb-6">
-            <h1 class="text-2xl font-bold text-indigo-400">Selamat Datang, <span id="username-display">...</span>!</h1>
-            <a href="/" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm font-semibold">Logout</a>
+<body class="bg-[#0b0f19] text-gray-200 min-h-screen">
+
+    <div class="max-w-6xl mx-auto p-4 md:p-6">
+        <!-- Top Navigation -->
+        <div class="flex justify-between items-center bg-[#151c2c] border border-gray-800 p-4 rounded-2xl mb-6 shadow-xl">
+            <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <h1 class="text-xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">NANZZ PANEL v1.0</h1>
+            </div>
+            <a href="/" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-1.5 rounded-xl text-xs font-bold transition">LOGOUT</a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div class="bg-gray-800 p-4 rounded-lg shadow">
-                <p class="text-gray-400 text-sm">API Key Anda</p>
-                <p id="apikey-display" class="text-lg font-mono text-green-400 font-bold mt-1">Memuat...</p>
+        <!-- Dashboard Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-[#151c2c] border border-gray-800 p-4 rounded-xl flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-gray-400 uppercase">Selamat Datang</p>
+                    <h2 id="disp-name" class="text-lg font-bold text-white mt-1">Guest</h2>
+                </div>
+                <i class="fas fa-user-shield text-2xl text-indigo-500"></i>
             </div>
-            <div class="bg-gray-800 p-4 rounded-lg shadow">
-                <p class="text-gray-400 text-sm">Sisa Limit Hari Ini</p>
-                <p id="limit-display" class="text-2xl font-bold text-yellow-400 mt-1">0</p>
+            <div class="bg-[#151c2c] border border-gray-800 p-4 rounded-xl flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-gray-400 uppercase">API Key Anda</p>
+                    <code id="disp-key" class="text-sm font-mono font-bold text-green-400 block mt-1 select-all cursor-pointer">Loading...</code>
+                </div>
+                <i class="fas fa-key text-2xl text-green-500"></i>
+            </div>
+            <div class="bg-[#151c2c] border border-gray-800 p-4 rounded-xl flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-gray-400 uppercase">Limit / Status</p>
+                    <h2 class="text-lg font-bold text-white mt-1"><span id="disp-limit" class="text-yellow-400">0</span> (<span id="disp-status" class="text-purple-400">Free</span>)</h2>
+                </div>
+                <i class="fas fa-bolt text-2xl text-yellow-500"></i>
             </div>
         </div>
 
-        <div class="bg-gray-800 p-6 rounded-lg shadow">
-            <h2 class="text-xl font-semibold text-indigo-300 mb-4">📖 Dokumentasi API (Contoh)</h2>
+        <!-- API DOCUMENTATION LIST -->
+        <div class="bg-[#151c2c] border border-gray-800 rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold text-white mb-4"><i class="fas fa-folder-open text-purple-500 mr-2"></i> KATEGORI API ENDPOINT</h3>
             
-            <div class="border-l-4 border-indigo-500 bg-gray-750 p-4 rounded mb-4 bg-gray-750 bg-opacity-50">
-                <span class="bg-green-600 px-2 py-1 rounded text-xs font-bold mr-2">GET</span>
-                <code class="text-sm">/api/fitur/cuaca</code>
-                <p class="text-gray-400 text-xs mt-2">Mendapatkan data informasi cuaca suatu kota.</p>
-                
-                <p class="text-sm font-semibold mt-3 text-gray-300">Parameter:</p>
-                <ul class="list-disc list-inside text-xs text-gray-400 ml-2">
-                    <li><code class="text-indigo-400">apikey</code> (Wajib) - API Key Anda</li>
-                    <li><code class="text-indigo-400">kota</code> (Opsional) - Nama Kota (Default: Jakarta)</li>
-                </ul>
+            <div class="space-y-3">
+                <!-- Kategori 1 -->
+                <div class="bg-[#0f1422] border border-gray-800 rounded-xl p-4">
+                    <h4 class="text-sm font-bold text-indigo-400 flex items-center mb-3"><i class="fas fa-cloud-download-alt mr-2"></i> DOWNLOADER</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-[#151c2c] text-gray-400 uppercase font-mono">
+                                <tr>
+                                    <th class="p-2.5 rounded-l-lg">Nama Fitur</th>
+                                    <th class="p-2.5">Method</th>
+                                    <th class="p-2.5">Parameter</th>
+                                    <th class="p-2.5 rounded-r-lg">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-800 font-medium">
+                                <tr>
+                                    <td class="p-3 text-white">TikTok Downloader</td>
+                                    <td class="p-3"><span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded border border-green-500/30">GET</span></td>
+                                    <td class="p-3 text-gray-400 font-mono">url</td>
+                                    <td class="p-3"><button onclick="testApi('/api/download/tiktok?url=https://vt.tiktok.com/xxx')" class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-[11px] font-bold">TEST</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 text-white">YouTube Downloader</td>
+                                    <td class="p-3"><span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded border border-green-500/30">GET</span></td>
+                                    <td class="p-3 text-gray-400 font-mono">url</td>
+                                    <td class="p-3"><button onclick="testApi('/api/download/youtube?url=https://youtube.com/watch?v=xxx')" class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-[11px] font-bold">TEST</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                <p class="text-sm font-semibold mt-3 text-gray-300">Contoh URL Request:</p>
-                <textarea id="example-url" readonly class="w-full p-2 bg-gray-900 rounded text-xs font-mono text-indigo-300 mt-1 h-10 resize-none"></textarea>
+                <!-- Kategori 2 -->
+                <div class="bg-[#0f1422] border border-gray-800 rounded-xl p-4">
+                    <h4 class="text-sm font-bold text-purple-400 flex items-center mb-3"><i class="fas fa-robot mr-2"></i> ARTIFICIAL INTELLIGENCE</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <tbody class="divide-y divide-gray-800 font-medium">
+                                <tr>
+                                    <td class="p-3 w-1/4 text-white">ChatGPT AI</td>
+                                    <td class="p-3 w-20"><span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded border border-green-500/30">GET</span></td>
+                                    <td class="p-3 text-gray-400 font-mono">text</td>
+                                    <td class="p-3 w-16"><button onclick="testApi('/api/ai/chatgpt?text=halo')" class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-[11px] font-bold">TEST</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 text-white">Google Bard AI</td>
+                                    <td class="p-3"><span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded border border-green-500/30">GET</span></td>
+                                    <td class="p-3 text-gray-400 font-mono">text</td>
+                                    <td class="p-3"><button onclick="testApi('/api/ai/bard?text=hai')" class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-[11px] font-bold">TEST</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Kategori 3 -->
+                <div class="bg-[#0f1422] border border-gray-800 rounded-xl p-4">
+                    <h4 class="text-sm font-bold text-emerald-400 flex items-center mb-3"><i class="fas fa-tools mr-2"></i> UTILITIES & IMAGES</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <tbody class="divide-y divide-gray-800 font-medium">
+                                <tr>
+                                    <td class="p-3 w-1/4 text-white">Screenshot Web (SSWEB)</td>
+                                    <td class="p-3 w-20"><span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded border border-green-500/30">GET</span></td>
+                                    <td class="p-3 text-gray-400 font-mono">url</td>
+                                    <td class="p-3 w-16"><button onclick="testApi('/api/tools/ssweb?url=google.com')" class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-[11px] font-bold">TEST</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 text-white">Random Waifu Image</td>
+                                    <td class="p-3"><span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded border border-green-500/30">GET</span></td>
+                                    <td class="p-3 text-gray-400 font-mono">-</td>
+                                    <td class="p-3"><button onclick="testApi('/api/anime/waifu')" class="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded-md text-[11px] font-bold">TEST</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
     <script>
-        // Ambil nama user dari URL parameter
         const urlParams = new URLSearchParams(window.location.search);
-        const username = urlParams.get('username');
+        const username = urlParams.get('user');
+        let currentApiKey = "";
 
-        // Ambil data statistik user dari API Backend saat halaman dimuat
-        if (username) {
-            fetch(`/api/user-stats?username=${username}`)
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('username-display').innerText = data.username;
-                    document.getElementById('apikey-display').innerText = data.apikey;
-                    document.getElementById('limit-display').innerText = data.limit;
-                    
-                    // Set contoh URL dinamis sesuai API Key user
-                    const fullUrl = `${window.location.origin}/api/fitur/cuaca?kota=Bandung&apikey=${data.apikey}`;
-                    document.getElementById('example-url').value = fullUrl;
-                });
-        } else {
-            window.location.href = '/';
+        if(!username) { window.location.href = '/'; }
+
+        // Memuat profil user saat masuk panel
+        fetch(`/auth/profile?username=${username}`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('disp-name').innerText = data.username;
+                document.getElementById('disp-key').innerText = data.apikey;
+                document.getElementById('disp-limit').innerText = data.limit;
+                document.getElementById('disp-status').innerText = data.status;
+                currentApiKey = data.apikey;
+            });
+
+        // Handler saat tombol TEST ditekan oleh user
+        function testApi(endpointPath) {
+            const separator = endpointPath.includes('?') ? '&' : '?';
+            const fullTargetUrl = `${window.location.origin}${endpointPath}${separator}apikey=${currentApiKey}`;
+            // Membuka tab baru untuk melihat response JSON rapi layaknya API asli
+            window.open(fullTargetUrl, '_blank');
+            
+            // Refresh limit tipis-tipis setelah jeda
+            setTimeout(() => {
+                fetch(`/auth/profile?username=${username}`)
+                .then(res => res.json()).then(d => document.getElementById('disp-limit').innerText = d.limit);
+            }, 1000);
         }
     </script>
 </body>
