@@ -1,0 +1,13 @@
+{
+  "name": "web-apikey-simple",
+  "version": "1.0.0",
+  "description": "Website API Key Sederhana",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "path": "^0.12.7"
+  }
+}
